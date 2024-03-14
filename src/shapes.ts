@@ -1,13 +1,13 @@
 export type Shape = {
   
     color: string,
-    cells: { x: number, y: number }[]
+    cells:  number []
     rotate?: () => void
   }
   export const square: Shape = {
     
     color: "blue",
-    cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+    cells: [5, 6, 17, 18]
 };
   
   export const stick: Shape = {
@@ -16,7 +16,7 @@ export type Shape = {
   rotate(){
     //some logic
   },
-  cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+  cells: [5, 6, 7, 8]
   }
   export const ell: Shape = {
   
@@ -24,7 +24,7 @@ export type Shape = {
   rotate(){
     //so,me logic
   },
-  cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+  cells: [5, 17, 29, 30]
   }
   export const jey: Shape = {
  
@@ -32,7 +32,7 @@ export type Shape = {
   rotate(){
     //some logic
   },
-  cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+  cells: [7, 19, 31, 30]
   }
   export const tee: Shape = {
   
@@ -40,7 +40,7 @@ export type Shape = {
   rotate(){
     //some logic
   },
-  cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+  cells: [5, 6, 7, 18]
   }
   export const ess: Shape = {
  
@@ -48,7 +48,7 @@ export type Shape = {
   rotate(){
     //some logic
   },
-  cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+  cells: [7, 8, 18 ,19]
   }
   export const zee: Shape = {
  
@@ -56,7 +56,7 @@ export type Shape = {
   rotate(){
     //some logic
   },
-  cells: [{ x: 5, y: 0 }, { x: 6, y: 0 }, { x: 5, y: 1 }, { x: 6, y: 1 }]
+  cells: [6, 7, 19, 20]
   }
 
   export const shapesArray = [

@@ -24,8 +24,7 @@ if(!boardCells){
 }
 const renderShape = (shape: Shape) :void=> {
   shape.cells.forEach((cell) => {
-      const position = cell.y * 12 + cell.x; 
-      const cellElement = boardCells[position];
+      const cellElement = boardCells[cell];
       cellElement.style.backgroundColor = shape.color;
   });
 }
@@ -34,3 +33,9 @@ const renderShape = (shape: Shape) :void=> {
 
 
 renderShape(square);
+renderShape(stick);
+renderShape(ell);
+renderShape(jey);
+renderShape(tee);
+renderShape(ess);
+renderShape(zee);
