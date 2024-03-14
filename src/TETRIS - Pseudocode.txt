@@ -1,0 +1,12 @@
+		TETRIS - Pseudocode
+
+1 - create the game container, inside it 2 containers: shapes container and display container
+2 - inside shapes container create a grid of squares, where shapes will fall
+3 - create the different shapes as objects and give properties(color, shape, movement) put in an array
+4 - create funcions for moving the shapes when a key is presed (left, right, down)
+5 - a function that makes the shape fall at a certain speed depending on difficulty
+6 - a function or eventlistener that makes the shape stop when it's base touches the base of the game or the top of another shape (with a small delay)
+7 - when a line is full, eliminate that line and bring the whole structure of shapes on top of the line 1 line down
+8 - a funtion or eventlistener that detects when you loose
+9 - cretae scoring functions and user registration
+10 - create a landing page
