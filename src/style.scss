@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  overflow: hidden;
+}
 
 .game {
   display: flex;
@@ -10,7 +13,7 @@
   width: 480px;
   
   
-  margin: 6rem auto;
+  margin: 4rem auto;
 
   &__board {
     width: 240px;
