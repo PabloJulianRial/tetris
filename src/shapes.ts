@@ -3,7 +3,7 @@ export type Shape = {
   yPos:number ,
   xPosStart:number,
   xPosEnd:number,
-  
+  isVertical?:boolean ,
   variation: number,
   color: string,
   lineTo:  number [][]
@@ -14,6 +14,7 @@ export const square: Shape = {
   yPos : 0,
   xPosStart :100,
   xPosEnd:140,
+  isVertical : false,
   variation: 0,
   color: "blue",
   lineTo:[ [100,-20],[140, -20], [140, 20], [100, 20], [100,-20]]
@@ -24,18 +25,39 @@ export const stick: Shape = {
   yPos : 0,
   xPosStart :100,
   xPosEnd:180,
+  isVertical : false,
   variation: 0,
 color: "green",
 rotate(){
-  //some logic
+  if(!this.isVertical){
+    this.lineTo[0] = [this.lineTo[0][0]+40,this.lineTo[0][1]-40 ]
+    this.lineTo[1] = [this.lineTo[1][0]-40,this.lineTo[1][1]+40 ]
+    this.lineTo[2] = [this.lineTo[2][0]-60,this.lineTo[2][1]+20 ]
+    this.lineTo[3] = [this.lineTo[3][0]+20,this.lineTo[3][1]-60 ]
+    this.lineTo[4] = [this.lineTo[4][0]+40,this.lineTo[4][1]-40 ]
+    this.isVertical = true
+  }
+  else{
+    this.lineTo[0] = [this.lineTo[0][0]-40,this.lineTo[0][1]+40 ]
+    this.lineTo[1] = [this.lineTo[1][0]+40,this.lineTo[1][1]-40 ]
+    this.lineTo[2] = [this.lineTo[2][0]+60,this.lineTo[2][1]-20 ]
+    this.lineTo[3] = [this.lineTo[3][0]-20,this.lineTo[3][1]+60 ]
+    this.lineTo[4] = [this.lineTo[4][0]-40,this.lineTo[4][1]+40 ]
+    this.isVertical = false
+  }
+  
+  
 },
-lineTo: [ [100,0],[180, 0], [180, 20], [100, 20], [100, 0]]
+lineTo: [ [100,0],[180, 0], [180, 20], [100, 20], [100, 0]],
+//  [[140, -40], [140, 40], [220, 40], [120, -40], [140, -40]]
+
 }
 export const ell: Shape = {
   id:3,
   yPos : 0,
   xPosStart :100,
   xPosEnd:140,
+  isVertical : false,
   variation: 0,
 color: "yellow",
 rotate(){
@@ -48,6 +70,7 @@ export const jey: Shape = {
   yPos : 0,
   xPosStart :60,
   xPosEnd:100,
+  isVertical : false,
   variation: 0,
 color: "pink",
 rotate(){
@@ -62,6 +85,7 @@ export const tee: Shape = {
   yPos : 0,
   xPosStart :80,
   xPosEnd:140,
+  isVertical : false,
   variation: 0,
 color: "orange",
 rotate(){
@@ -74,6 +98,7 @@ export const ess: Shape = {
   yPos : 0,
   xPosStart :100,
   xPosEnd:160,
+  isVertical : false,
   variation: 0,
 color: "brown",
 rotate(){
@@ -86,6 +111,7 @@ export const zee: Shape = {
   yPos : 0,
   xPosStart :40,
   xPosEnd:100,
+  isVertical : false,
   variation: 0,
 color: "red",
 rotate(){

@@ -147,6 +147,10 @@ const handleKeyDown = (event: KeyboardEvent) => {
     currentShape.lineTo.forEach((point) => {
       currentShape.yPos += 1;
     });
+  }else if(event.key === "ArrowUp"){
+    if (currentShape.rotate) {
+      currentShape.rotate();
+    }
   }
 };
 
