@@ -3,76 +3,74 @@
   padding: 0;
   box-sizing: border-box;
 }
-body{
-  overflow: hidden;
+
+body {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.heading{
+  text-align: center;
+  margin-top: 0.5rem;
+  color: rgb(242, 227, 141);
 }
 
 .game {
   display: flex;
-
-  width: 480px;
-  
-  
-  margin: 4rem auto;
-
-  &__board {
-    width: 240px;
-       display: grid;
-    grid-template-columns: repeat(12, 20px);
-    grid-template-rows: repeat(20, 20px);
-    background-color: rgb(233, 210, 210);
-    &__cell{
-        border: 1px solid black
-    }
-  
-  }
+  border:0.5px solid black;
+  width: 360px;
+  height: 400px;
+  margin: 1rem auto;
   &__display {
-    flex-direction: column;
-  
-    height: 400px;
+    width: 120px;
     display: flex;
     flex-direction: column;
-    &__next{
-     height: 60px;
-      display: flex;
-      flex-wrap: wrap;
-      > *{
-        background-color: cadetblue;
+    &__next {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      > * {
+        border: 1px solid black;
+        background-color: rgb(171, 174, 174);
         width: 60px;
         height: 60px;
-        border: 1px solid green;
       }
     }
-    &__stats{
-      background-color: cadetblue;
+    &__stats {
+      background-color: rgb(171, 174, 174);
       border: 1px solid black;
-      height: 150px;
+      height: 100px;
       display: flex;
       flex-direction: column;
       align-items: left;
-      justify-content: space-around;
-      > *{
+      padding-left: 5px;
+      > * {
         padding-top: 7px;
         height: 25%;
-        border: 1px solid black;
+        font-size: 9px;
+      }
+      &game__display__stats__lines{
+        font-size: 25px;
       }
     }
-    &__scores{
-      background-color: cadetblue;
-      border: 1px solid black;
-      height: 125px;
+    &__scores {
+     
+      background-color: rgb(171, 174, 174);
+      
+      height: 120px;
       display: flex;
       flex-direction: column;
       align-items: left;
       justify-content: space-around;
-      > *{
-        padding-top: 5px;
-        height: 25%;
-        border: 1px solid black;
+      > * {
+        text-align: center;
+        font-size: 7px;
+      }
+      &__head{
+        font-size: 9px;
       }
     }
-    &__actions{
-      border: 1px solid black;
+    &__actions {
       height: 75px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);

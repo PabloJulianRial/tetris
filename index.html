@@ -5,28 +5,33 @@
     <link rel="stylesheet" href="style.scss" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tetricks</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
   </head>
   <body>
+    <h2 class="heading">TETRICKS</h2>
     <main class="game">
-      <section class="game__board"></section>
+      <canvas id="game__board" width="240" height="400" solid #000000;></canvas>
       <section class="game__display">
         <div class="game__display__next">
-          <div class="game__display__next__item"></div>
-          <div class="game__display__next__item"></div>
+          <div class="game__display__next__item"><canvas id="next1" width="60" height="60" solid #000000;></canvas></div>
+          <div class="game__display__next__item"><canvas id="next2" width="60" height="60" solid #000000;></canvas></div>
           <div class="game__display__next__item"></div>
           <div class="game__display__next__item"></div>
         </div>
         <div class="game__display__stats">
-          <div class="game__display__stats__level"><h3>LEVEL</h3></div>
-          <div class="game__display__stats__score"><h3>SCORE</h3></div>
-          <div class="game__display__stats__lines"><h3>LINES</h3></div>
-          <div class="game__display__stats__user"><h3>USER</h3></div>
+          <div class="game__display__stats__user"><h6></h6></div>
+          <div class="game__display__stats__level"><h6></h6></div>
+          <div class="game__display__stats__score"><h6></h6></div>
+          <div class="game__display__stats__lines"><h6></h6></div>
         </div>
         <div class="game__display__scores">
-          <h3>SCORE</h3>
-          <h3>SCORE</h3>
-          <h3>SCORE</h3>
-          <h3>SCORE</h3>
+          <h6 class="game__display__scores__head">Top scorers</h6>
+          <h6 class="game__display__scores__one"></h6>
+          <h6 class="game__display__scores__two"></h6>
+          <h6 class="game__display__scores__three"></h6>
+          <h6 class="game__display__scores__four"></h6>
+          <h6 class="game__display__scores__five"></h6>
+          <h6 class="game__display__scores__six"></h6>
         </div>
         <div class="game__display__actions">
           <button class="button button__action1">action1</button>

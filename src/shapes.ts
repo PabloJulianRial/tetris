@@ -1,64 +1,64 @@
 export type Shape = {
-  
-    color: string,
-    cells:  number []
-    rotate?: () => void
-  }
-  export const square: Shape = {
-    
-    color: "blue",
-    cells: [5, 6, 17, 18]
+  speed:number ,
+  color: string,
+  lineTo:  number [][]
+  rotate?: () => void
+}
+export const square: Shape = {
+  speed : 0,
+  color: "blue",
+  lineTo:[ [100,0],[140, 0], [140, 40], [100, 40], [100,0]]
 };
-  
-  export const stick: Shape = {
-  
-  color: "green",
-  rotate(){
-    //some logic
-  },
-  cells: [5, 6, 7, 8]
-  }
-  export const ell: Shape = {
-  
-  color: "yellow",
-  rotate(){
-    //so,me logic
-  },
-  cells: [5, 17, 29, 30]
-  }
-  export const jey: Shape = {
- 
-  color: "pink",
-  rotate(){
-    //some logic
-  },
-  cells: [7, 19, 31, 30]
-  }
-  export const tee: Shape = {
-  
-  color: "orange",
-  rotate(){
-    //some logic
-  },
-  cells: [5, 6, 7, 18]
-  }
-  export const ess: Shape = {
- 
-  color: "brown",
-  rotate(){
-    //some logic
-  },
-  cells: [7, 8, 18 ,19]
-  }
-  export const zee: Shape = {
- 
-  color: "red",
-  rotate(){
-    //some logic
-  },
-  cells: [6, 7, 19, 20]
-  }
 
-  export const shapesArray = [
-    square, stick, jey, ell, ess, zee, tee
-  ]
+export const stick: Shape = {
+  speed : 0,
+color: "green",
+rotate(){
+  //some logic
+},
+lineTo: [ [100,0],[180, 0], [180, 20], [100, 20], [100, 0]]
+}
+export const ell: Shape = {
+  speed : 0,
+color: "yellow",
+rotate(){
+  //so,me logic
+},
+lineTo: [[100,0],[100, 60], [140, 60], [140, 40], [120, 40], [120, 0], [100, 0]]
+}
+export const jey: Shape = {
+  speed : 0,
+color: "pink",
+rotate(){
+  //some logic
+},
+lineTo: [[100,0],[100, 60], [60, 60], [60, 40], [80, 40], [80, 0], [100, 0]]
+}
+export const tee: Shape = {
+  speed : 0,
+color: "orange",
+rotate(){
+  //some logic
+},
+lineTo: [[100,0],[140, 0],[140, 20],[120, 20], [120, 40], [100, 40], [100, 20], [80, 20], [80, 0], [100, 0]]
+}
+export const ess: Shape = {
+  speed : 0,
+color: "brown",
+rotate(){
+  //some logic
+},
+lineTo: [[100,0],[140, 0], [140, 20], [160, 20], [160, 40], [120, 40], [120, 20], [100, 20], [100, 0]]
+}
+export const zee: Shape = {
+  speed : 0,
+color: "red",
+rotate(){
+  //some logic
+},
+lineTo: [[100,0], [60, 0], [60, 20], [40, 20], [40, 40], [80, 40],[80, 20],[100, 20],  [100, 0]]
+}
+
+export const shapesArray = [
+  square, stick,  ell,jey, tee, ess, zee
+] 
