@@ -8,11 +8,24 @@ body {
   background-image: url("./assets/tetris-image.jpg");
   font-family: "Press Start 2P", cursive;
 }
+#form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 2rem auto;
+  >*{
+    margin:0.4rem;
+    text-align: center;
+  }
+  #username{
+    line-height: 32px;
+  }
+}
 #game__board {
   border: 4px solid rgb(117, 32, 122);
   background-color: white; /* Set a background color for the canvas */
 }
-.heading {
+.heading, .form__button {
   -webkit-text-stroke: 0.5px black; /* For WebKit browsers */
    
   font-size: 30px;
@@ -110,4 +123,7 @@ body {
       }
     }
   }
+}
+.game{
+  display: none;
 }

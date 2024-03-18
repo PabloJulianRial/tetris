@@ -2,7 +2,9 @@ import "./style.scss";
 import { Shape, shapesArray } from "./shapes";
 import { nextShapesArray } from "./nextShapes";
 import { users } from "./users";
-
+const game = document.querySelector<HTMLDivElement>(".game")
+const form = document.querySelector<HTMLFormElement>("#form")
+const tetrisMusic = document.querySelector<HTMLAudioElement>("#tetrisMusic")
 const level = document.querySelector<HTMLDivElement>(
   ".game__display__stats__level"
 );
@@ -44,7 +46,9 @@ const ctx = canvas.getContext("2d");
 const ctx1 = canvasNext1.getContext("2d");
 const ctx2 = canvasNext2.getContext("2d");
 
-if (
+ if (!tetrisMusic ||
+   !form ||
+   !game ||
   !ctx ||
   !next ||
   !ctx1 ||
@@ -65,17 +69,19 @@ if (
 
 //----------the array of shapes to fall-----------
 let generatedShapesArray: Shape[] = [];
+let fallenShapesArray: Shape[] = [];
 
-for (let shapeIndex: number = 0; shapeIndex < 500; shapeIndex++) {
+for (let shapeIndex: number = 0; shapeIndex < 5000; shapeIndex++) {
   const newShape: Shape =
     shapesArray[Math.floor(Math.random() * shapesArray.length)];
   generatedShapesArray.unshift(newShape);
 }
+let currentUser: string = ""
 let currentShape = generatedShapesArray[0];
 let currentLevel: number = 10;
 let currentScore: number = 1;
 let currentLines: number = 10;
-let fallInterval: number = 80;
+let fallInterval: number = 70;
 
 level.innerText = `LEVEL ${currentLevel}`;
 score.innerText = `Score  ${currentScore}`;
@@ -93,26 +99,101 @@ const drawRandomShape = () => {
   //-------checking if the shape touches the bottom or the sides---------------
   if (
     currentShape.yPos < 380 &&
-    currentShape.xPosStart >= 0 &&
-    currentShape.xPosEnd < 260
+    currentShape.xPos >= 0 &&
+    currentShape.xPos + currentShape.width < 260
   ) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawShape();
+    drawNext1Shape();
+    drawFallenShapes();
+  }
+  if (currentShape.yPos === 380) {
+    fallenShapesArray.push(currentShape);
+    generatedShapesArray.shift();
+    currentShape = generatedShapesArray[0];
+    drawFallenShapes();
+  }
+};
+
+//----------------------------Events-----------------------------------------------
+
+const handleForm = (event:Event) =>{
+  event.preventDefault(); 
+  const usernameInput = (document.getElementById("username") as HTMLInputElement).value;
+  currentUser = usernameInput;
+  (document.getElementById("username") as HTMLInputElement).value = "";
+  game.style.display = "flex"
+  form.style.display = "none"
+  console.log("Game started for user:", currentUser);
+
+}
+
+const handleKeyDown = (event: KeyboardEvent) => {
+  if (event.key === "ArrowLeft") {
+    if (currentShape.xPos > 10) {
+      console.log(currentShape.xPos);
+
+      currentShape.lineTo.forEach((point) => {
+        point[0] -= 20;
+      });
+      currentShape.xPos -= 20;
+    }
+  } else if (event.key === "ArrowRight") {
+    if (currentShape.xPos - currentShape.width< 280) {
+      console.log(currentShape.xPos);
+      console.log(currentShape.xPos);
+
+      currentShape.lineTo.forEach((point) => {
+        point[0] += 20;
+      });
+      currentShape.xPos += 20;
+    }
+  // } else if (event.key === "ArrowDown") {
+  //   currentShape.lineTo.forEach((point) => {
+  //     currentShape.yPos += 1;
+  //   });
+  // } else if (event.key === "ArrowUp") {
+    if (currentShape.rotate) {
+      currentShape.rotate();
+    }
+  }
+};
+form.addEventListener("submit", handleForm)
+document.addEventListener("keydown", handleKeyDown);
+
+setInterval(drawRandomShape, fallInterval);
+
+//-----------------------Drawing--------------------------------------
+
+const drawShape = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = `${currentShape.color}`;
+  currentShape.lineTo.forEach((line) => {
+    const x = line[0];
+    const y = line[1] + currentShape.yPos;
+    ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  ctx.fill();
+  currentShape.yPos += 1;
+};
+const drawFallenShapes = () => {
+  fallenShapesArray.forEach((shape) => {
     ctx.beginPath();
     ctx.strokeStyle = "black";
-    ctx.fillStyle = `${currentShape.color}`;
-    currentShape.lineTo.forEach((line) => {
+    ctx.fillStyle = `${shape.color}`;
+    shape.lineTo.forEach((line) => {
       const x = line[0];
-      const y = line[1] + currentShape.yPos;
+      const y = line[1] + shape.yPos;
       ctx.lineTo(x, y);
     });
     ctx.stroke();
     ctx.fill();
-    currentShape.yPos += 1;
-    drawNext1Shape();
-    
-  }
+  });
 };
 const drawNext1Shape = () => {
+  ctx1.clearRect(0, 0, canvas.width, canvas.height);
   nextShapesArray.forEach((nextShape) => {
     if (generatedShapesArray[1].id === nextShape.id) {
       ctx1.beginPath();
@@ -129,31 +210,4 @@ const drawNext1Shape = () => {
     }
   });
 };
-
-const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.key === "ArrowLeft") {
-    currentShape.lineTo.forEach((point) => {
-      point[0] -= 20;
-    });
-    currentShape.xPosStart -= 20;
-    currentShape.xPosEnd -= 20;
-  } else if (event.key === "ArrowRight") {
-    currentShape.lineTo.forEach((point) => {
-      point[0] += 20;
-    });
-    currentShape.xPosStart += 20;
-    currentShape.xPosEnd += 20;
-  } else if (event.key === "ArrowDown") {
-    currentShape.lineTo.forEach((point) => {
-      currentShape.yPos += 1;
-    });
-  }else if(event.key === "ArrowUp"){
-    if (currentShape.rotate) {
-      currentShape.rotate();
-    }
-  }
-};
-
-document.addEventListener("keydown", handleKeyDown);
-
-setInterval(drawRandomShape, fallInterval);
+// tetrisMusic.play()

@@ -9,6 +9,11 @@
   </head>
   <body>
     <h2 class="heading">TETRICKS</h2>
+    <h2 class="heading">Enter Your Username</h2>
+    <form id="form">
+      <input type="text" id="username" name="username">
+      <button class="form__button" type="submit">Play</button>
+    </form>
     <main class="game">
       <canvas id="game__board" width="240" height="400" solid #000000;></canvas>
       <section class="game__display">
@@ -42,5 +47,6 @@
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>
+    <audio id="tetrisMusic" src="./src/assets/tetris-music.mp3" loop></audio>
   </body>
 </html>
