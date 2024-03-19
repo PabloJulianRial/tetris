@@ -2,7 +2,7 @@ import "./style.scss";
 import { Shape, shapesArray } from "./shapes";
 import { nextShapesArray } from "./nextShapes";
 import { orderedScorersArray } from "./users";
-import { stick, square, ell, ess, zee, tee } from "./shapes";
+
 
 const game = document.querySelector<HTMLDivElement>(".game")
 const form = document.querySelector<HTMLFormElement>("#form")

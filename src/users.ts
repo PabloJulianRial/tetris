@@ -3,10 +3,7 @@ export type User = {
   score: number;
 };
 
-const currentUser: User = {
-  username: "Pablo",
-  score: 10000,
-};
+
 
 export const topScorersArray: User[] = [
   {
