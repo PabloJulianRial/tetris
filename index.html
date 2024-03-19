@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.scss" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetricks</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <script type="module" crossorigin src="./assets/index-CqX7ql_d.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BHTBPFLD.css">
+  </head>
+  <body>
+    <h2 class="heading">TETRICKS</h2>
+    <h2 class="heading">Enter Your Username</h2>
+    <form id="form">
+      <input type="text" id="username" name="username">
+      <button class="form__button" type="submit">Play</button>
+    </form>
+    <main class="game">
+      <canvas id="game__board" width="240" height="400" solid #000000;></canvas>
+      <section class="game__display">
+        <div class="game__display__next">
+          <div class="game__display__next__item"><canvas id="next1" width="60" height="60" solid #000000;></canvas></div>
+          <div class="game__display__next__item"><canvas id="next2" width="60" height="60" solid #000000;></canvas></div>
+          <div class="game__display__next__item3"><img src="./assets/cossacks-BrHsfcLh.jpg" alt=""></div>
+          <div class="game__display__next__item4"><img src="./assets/red-square-BX4h0IE1.png" alt=""></div>
+        </div>
+        <div class="game__display__stats">
+          <div class="game__display__stats__user"></div>
+          <div class="game__display__stats__level"><h6></h6></div>
+          <div class="game__display__stats__score"><h6></h6></div>
+          <div class="game__display__stats__lines"><h6></h6></div>
+        </div>
+        <div class="game__display__scores">
+          <h6 class="game__display__scores__head">Top scorers</h6>
+          <h6 class="game__display__scores__one"></h6>
+          <h6 class="game__display__scores__two"></h6>
+          <h6 class="game__display__scores__three"></h6>
+          <h6 class="game__display__scores__four"></h6>
+          <h6 class="game__display__scores__five"></h6>
+          <h6 class="game__display__scores__six"></h6>
+        </div>
+        <div class="game__display__actions">
+          <button class="button button__action1">action1</button>
+          <button class="button button__action2">action2</button>
+          <button class="button button__restart">restart</button>
+          <button class="button button__pause">pause</button>
+        </div>
+      </section>
+    </main>
+    <audio id="tetrisMusic" src="./src/assets/tetris-music.mp3" loop></audio>
+  </body>
+</html>
