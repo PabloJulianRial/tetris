@@ -1,7 +1,9 @@
 import "./style.scss";
 import { Shape, shapesArray } from "./shapes";
 import { nextShapesArray } from "./nextShapes";
-import { users } from "./users";
+import { orderedScorersArray } from "./users";
+import { stick, square, ell, ess, zee, tee } from "./shapes";
+
 const game = document.querySelector<HTMLDivElement>(".game")
 const form = document.querySelector<HTMLFormElement>("#form")
 const tetrisMusic = document.querySelector<HTMLAudioElement>("#tetrisMusic")
@@ -68,31 +70,32 @@ const ctx2 = canvasNext2.getContext("2d");
 }
 
 //----------the array of shapes to fall-----------
-let generatedShapesArray: Shape[] = [];
+const shapesPerLevel = 500
+let randomShapes: Shape[] = [];
 let fallenShapesArray: Shape[] = [];
 
-for (let shapeIndex: number = 0; shapeIndex < 5000; shapeIndex++) {
-  const newShape: Shape =
-    shapesArray[Math.floor(Math.random() * shapesArray.length)];
-  generatedShapesArray.unshift(newShape);
+for (let i: number = 0; i < shapesPerLevel; i++) {
+  const randomIndex: number = Math.floor(Math.random() * shapesArray.length)
+  const newShape: Shape = shapesArray[randomIndex];
+  randomShapes.push({...newShape});
 }
 let currentUser: string = ""
-let currentShape = generatedShapesArray[0];
-let currentLevel: number = 10;
+let currentShape =  randomShapes[0];
+let currentLevel: number = 1;
 let currentScore: number = 1;
 let currentLines: number = 10;
-let fallInterval: number = 70;
+let fallInterval: number = 20;
 
 level.innerText = `LEVEL ${currentLevel}`;
 score.innerText = `Score  ${currentScore}`;
 lines.innerText = `Lines ${currentLines}`;
-user.innerText = `User: ${users[0].username}`;
-scoreOne.innerText = `1st ${users[1].username} ${users[1].score}`;
-scoreTwo.innerText = `2nd ${users[2].username} ${users[2].score}`;
-scoreThree.innerText = `3rd ${users[3].username} ${users[3].score}`;
-scoreFour.innerText = `4th ${users[4].username} ${users[4].score}`;
-scoreFive.innerText = `5th ${users[5].username} ${users[5].score}`;
-scoreSix.innerText = `6th ${users[6].username} ${users[6].score}`;
+user.innerHTML= `<div><h5> P1:${currentUser}</h5></div>`;
+scoreOne.innerHTML = `<div>1st ${orderedScorersArray[0].username}</div><div> ${orderedScorersArray[0].score}</div>`;
+scoreTwo.innerHTML = `<div>1st ${orderedScorersArray[1].username}</div><div> ${orderedScorersArray[1].score}</div>`;
+scoreThree.innerHTML = `<div>1st ${orderedScorersArray[2].username}</div><div> ${orderedScorersArray[2].score}</div>`;
+scoreFour.innerHTML = `<div>1st ${orderedScorersArray[3].username}</div><div> ${orderedScorersArray[3].score}</div>`;
+scoreFive.innerHTML = `<div>1st ${orderedScorersArray[4].username}</div><div> ${orderedScorersArray[4].score}</div>`;
+scoreSix.innerHTML = `<div>1st ${orderedScorersArray[5].username}</div><div> ${orderedScorersArray[5].score}</div>`;
 
 //--------logic to draw the shape------------------
 const drawRandomShape = () => {
@@ -100,17 +103,21 @@ const drawRandomShape = () => {
   if (
     currentShape.yPos < 380 &&
     currentShape.xPos >= 0 &&
-    currentShape.xPos + currentShape.width < 260
+    currentShape.xPos + currentShape.width <= 250
   ) {
     drawShape();
     drawNext1Shape();
     drawFallenShapes();
+    console.log(shapesArray);
+    
   }
   if (currentShape.yPos === 380) {
     fallenShapesArray.push(currentShape);
-    generatedShapesArray.shift();
-    currentShape = generatedShapesArray[0];
+    randomShapes.shift();
+    currentShape = randomShapes[0];
     drawFallenShapes();
+  
+    
   }
 };
 
@@ -124,13 +131,13 @@ const handleForm = (event:Event) =>{
   game.style.display = "flex"
   form.style.display = "none"
   console.log("Game started for user:", currentUser);
-
+ user.innerHTML = `<h6>${currentUser}</h6>`
 }
 
 const handleKeyDown = (event: KeyboardEvent) => {
   if (event.key === "ArrowLeft") {
     if (currentShape.xPos > 10) {
-      console.log(currentShape.xPos);
+     
 
       currentShape.lineTo.forEach((point) => {
         point[0] -= 20;
@@ -139,8 +146,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
     }
   } else if (event.key === "ArrowRight") {
     if (currentShape.xPos - currentShape.width< 280) {
-      console.log(currentShape.xPos);
-      console.log(currentShape.xPos);
+     
 
       currentShape.lineTo.forEach((point) => {
         point[0] += 20;
@@ -150,8 +156,8 @@ const handleKeyDown = (event: KeyboardEvent) => {
   // } else if (event.key === "ArrowDown") {
   //   currentShape.lineTo.forEach((point) => {
   //     currentShape.yPos += 1;
-  //   });
-  // } else if (event.key === "ArrowUp") {
+  //   });}
+   } else if (event.key === "ArrowUp") {
     if (currentShape.rotate) {
       currentShape.rotate();
     }
@@ -160,7 +166,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
 form.addEventListener("submit", handleForm)
 document.addEventListener("keydown", handleKeyDown);
 
-setInterval(drawRandomShape, fallInterval);
+//setInterval(drawRandomShape, fallInterval);
 
 //-----------------------Drawing--------------------------------------
 
@@ -195,7 +201,7 @@ const drawFallenShapes = () => {
 const drawNext1Shape = () => {
   ctx1.clearRect(0, 0, canvas.width, canvas.height);
   nextShapesArray.forEach((nextShape) => {
-    if (generatedShapesArray[1].id === nextShape.id) {
+    if (randomShapes[1].id === nextShape.id) {
       ctx1.beginPath();
       ctx1.moveTo(30, 20);
       ctx1.strokeStyle = "black";
@@ -211,3 +217,45 @@ const drawNext1Shape = () => {
   });
 };
 // tetrisMusic.play()
+
+
+
+
+
+let intervalId: number | null = null; 
+let isPaused: boolean = false; 
+
+
+const startGame = () => {
+  intervalId = setInterval(drawRandomShape, fallInterval);
+};
+
+const pauseGame = () => {
+  clearInterval(intervalId!); 
+  intervalId = null;
+  isPaused = true;
+ 
+};
+
+
+const resumeGame = () => {
+  startGame();
+  isPaused = false;
+
+};
+const togglePauseResume = () => {
+  if (isPaused) {
+    resumeGame();
+  } else {
+    pauseGame();
+  }
+};
+
+
+const pauseButton = document.querySelector(".button__pause");
+if (pauseButton) {
+  pauseButton.addEventListener("click", togglePauseResume);
+}
+
+
+startGame();

@@ -23,10 +23,10 @@ body {
 }
 #game__board {
   border: 4px solid rgb(117, 32, 122);
-  background-color: white; /* Set a background color for the canvas */
+  background-color: white; 
 }
 .heading, .form__button {
-  -webkit-text-stroke: 0.5px black; /* For WebKit browsers */
+  -webkit-text-stroke: 0.5px black; 
    
   font-size: 30px;
   border: 1px solid b;
@@ -38,7 +38,7 @@ body {
 
 .game {
   display: flex;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Add box-shadow for 3D effect */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); 
 
   width: 360px;
   height: 400px;
@@ -61,6 +61,8 @@ body {
         background-color: rgb(171, 174, 174);
         width: 59px;
         height: 59px;
+       
+        
       }
       &__item3 {
         border-right: 2px inset rgb(135, 134, 134);
@@ -70,6 +72,7 @@ body {
       }
     }
     &__stats {
+     
       background-color: rgb(171, 174, 174);
     
       height: 100px;
@@ -79,18 +82,50 @@ body {
      
       > * {
         border: 1px solid black;
+        font-weight: 900;
         padding-top: 7px;
+        padding-left: 5px;
         height: 25%;
         font-size: 9px;
+      }
+      &__user{
+        font-size: 20px;
+        text-align: center;
+        text-transform: capitalize;
+        color: yellow;
+        -webkit-text-stroke: 0.5px black; 
       }
       &game__display__stats__lines {
         font-size: 25px;
       }
     }
     &__scores {
+      > *{
+        font-size: 11px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        -webkit-text-stroke: 0.4px black; 
+      }
+      
+      
+      &__one {
+        color: rgb(236, 143, 77);
+      }
+      &__two {
+        color: rgb(181, 217, 17);
+      }
+      &__three {
+        color: rgb(8, 233, 42);
+      }
+      &__four {
+        color: rgb(48, 18, 240);
+      }
+      &__five {
+        color: rgb(173, 45, 219);
+      }
       &__six {
         display: flex;
         flex-direction: row;
+        color: rgb(234, 147, 162)
       }
 
       background-color: rgb(171, 174, 174);
@@ -102,15 +137,19 @@ body {
       > * {
         height: 100%;
         padding-top: 3px;
+        padding-left: 3px;
+        padding-right: 3px;
         border: 1px solid rgb(110, 105, 105);
-        text-align: left;
-        font-size: 6px;
+        
+       
         display: flex;
         flex-direction: row;
         justify-content: space-between;
       }
       &__head {
-        font-size: 9px;
+        font-size: 14px;
+        color: red;
+        padding-left: 17px;
       }
     }
     &__actions {
@@ -124,6 +163,16 @@ body {
     }
   }
 }
-.game{
-  display: none;
+// .game{
+//   display: none;
+// }
+.game__display__next__item3 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure the image fits without stretching */
+}
+.game__display__next__item4 img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure the image fits without stretching */
 }
