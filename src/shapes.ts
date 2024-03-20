@@ -47,6 +47,8 @@ export const stick: Shape = {
       this.lineTo[3] = [this.lineTo[3][0] + 20, this.lineTo[3][1] - 60];
       this.lineTo[4] = [this.lineTo[4][0] + 40, this.lineTo[4][1] - 40];
       this.is90 = true;
+      this.width +=20
+
     } else {
       this.lineTo[0] = [this.lineTo[0][0] - 40, this.lineTo[0][1] + 40];
       this.lineTo[1] = [this.lineTo[1][0] + 40, this.lineTo[1][1] - 40];
@@ -252,6 +254,7 @@ export const tee: Shape = {
       ];
       this.is90 = true;
       this.is360 = false;
+      this.yPos -=20
     } else if (this.is90 && !this.is180 && !this.is270 && !this.is360) {
       this.lineTo = [
         [100, 0],
@@ -266,6 +269,7 @@ export const tee: Shape = {
       ];
       this.is90 = false;
       this.is180 = true;
+      this.yPos += 20
 
     }
     else if(!this.is90 && this.is180 && !this.is270 && !this.is360){

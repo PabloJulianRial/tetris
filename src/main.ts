@@ -2,7 +2,6 @@ import "./style.scss";
 import { Shape, shapesArray } from "./shapes";
 import { nextShapesArray } from "./nextShapes";
 import { orderedScorersArray } from "./users";
- 
 
 const paint = document.querySelector<HTMLButtonElement>(".button__paint");
 const game = document.querySelector<HTMLDivElement>(".game");
@@ -51,7 +50,6 @@ const ctx = canvas.getContext("2d");
 const ctx1 = canvasNext1.getContext("2d");
 
 if (
- 
   !paint ||
   !start ||
   !tetrisMusic ||
@@ -88,11 +86,11 @@ for (let i: number = 0; i < shapesPerLevel; i++) {
   randomShapes.push(newShape);
 }
 let currentUser: string = "";
-let currentShape =  shapesArray[3]//randomShapes[0];
+let currentShape = randomShapes[0];
 let currentLevel: number = 1;
 let currentScore: number = 0;
 let currentLines: number = 10;
-let fallInterval: number = 400;
+let fallInterval: number = 3;
 let isBlack: boolean = false;
 let isWhite: boolean = true;
 let isPsycho: boolean = false;
@@ -159,9 +157,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
       currentShape.xPos += 20;
     }
   } else if (event.key === "ArrowUp") {
-    
-      currentShape.rotate();
-    
+    currentShape.rotate();
   }
 };
 
@@ -304,8 +300,3 @@ const pauseButton = document.querySelector(".button__pause");
 if (pauseButton) {
   pauseButton.addEventListener("click", togglePauseResume);
 }
-
-
-
-
-
