@@ -20,7 +20,7 @@ export const topScorersArray: User[] = [
     score: 7000,
   },
   {
-    username: "ATHISH",
+    username: "CHERYL",
     score: 5000,
   },
   {
