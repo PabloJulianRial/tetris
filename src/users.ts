@@ -3,8 +3,6 @@ export type User = {
   score: number;
 };
 
-
-
 export const topScorersArray: User[] = [
   {
     username: "ATHISH",
@@ -33,5 +31,6 @@ export const topScorersArray: User[] = [
   },
 ];
 
-
- export const orderedScorersArray = topScorersArray.sort((b, a) =>a.score - b.score )
+export const orderedScorersArray = topScorersArray.sort(
+  (b, a) => a.score - b.score
+);

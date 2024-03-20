@@ -90,7 +90,7 @@ let currentShape = randomShapes[0];
 let currentLevel: number = 1;
 let currentScore: number = 0;
 let currentLines: number = 10;
-let fallInterval: number = 15;
+let fallInterval: number = 22;
 let isBlack: boolean = false;
 let isWhite: boolean = true;
 let isPsycho: boolean = false;
@@ -295,7 +295,6 @@ const togglePauseResume = () => {
     pauseGame();
   }
 };
-
 const pauseButton = document.querySelector(".button__pause");
 if (pauseButton) {
   pauseButton.addEventListener("click", togglePauseResume);
