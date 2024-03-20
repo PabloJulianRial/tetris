@@ -7,7 +7,7 @@ export type Shape = {
   is180?: boolean;
   is270?: boolean;
   is360?: boolean;
-  variation: number;
+
   color: string;
   lineTo: number[][];
   rotate: () => void;
@@ -17,24 +17,10 @@ export const square: Shape = {
   yPos: 0,
   xPos: 100,
   width: 40,
-  variation: 0,
+
   color: "blue",
   rotate() {
-    if (!this.is90) {
-      this.lineTo[0] = [this.lineTo[0][0] + 40, this.lineTo[0][1] - 40];
-      this.lineTo[1] = [this.lineTo[1][0] - 40, this.lineTo[1][1] + 40];
-      this.lineTo[2] = [this.lineTo[2][0] - 60, this.lineTo[2][1] + 20];
-      this.lineTo[3] = [this.lineTo[3][0] + 20, this.lineTo[3][1] - 60];
-      this.lineTo[4] = [this.lineTo[4][0] + 40, this.lineTo[4][1] - 40];
-      this.is90 = true;
-    } else {
-      this.lineTo[0] = [this.lineTo[0][0] - 40, this.lineTo[0][1] + 40];
-      this.lineTo[1] = [this.lineTo[1][0] + 40, this.lineTo[1][1] - 40];
-      this.lineTo[2] = [this.lineTo[2][0] + 60, this.lineTo[2][1] - 20];
-      this.lineTo[3] = [this.lineTo[3][0] - 20, this.lineTo[3][1] + 60];
-      this.lineTo[4] = [this.lineTo[4][0] - 40, this.lineTo[4][1] + 40];
-      this.is90 = false;
-    }
+    
   },
   lineTo: [
     [100, -20],
@@ -51,8 +37,8 @@ export const stick: Shape = {
   xPos: 100,
   width: 80,
   is90: false,
-  variation: 0,
-  color: "green",
+
+  color: "red",
   rotate() {
     if (!this.is90) {
       this.lineTo[0] = [this.lineTo[0][0] + 40, this.lineTo[0][1] - 40];
@@ -85,28 +71,63 @@ export const ell: Shape = {
   width: 40,
   is90: false,
   is180: false,
-  is360: false,
-  variation: 0,
-  color: "yellow",
+  is270:false,
+  is360: true,
+
+  color: "purple",
   rotate() {
-    if (!this.is90) {
-      this.lineTo[0] = [this.lineTo[0][0], this.lineTo[0][1] + 20];
-      this.lineTo[1] = [this.lineTo[1][0] + 60, this.lineTo[1][1] - 40];
-      this.lineTo[2] = [this.lineTo[2][0] + 20, this.lineTo[2][1] - 20];
-      this.lineTo[3] = [this.lineTo[3][0] - 20, this.lineTo[3][1]];
-      this.lineTo[4] = [this.lineTo[4][0], this.lineTo[4][1] + 20];
-      this.lineTo[5] = [this.lineTo[5][0] - 20, this.lineTo[5][1] + 60];
-      this.lineTo[6] = [this.lineTo[6][0], this.lineTo[6][1] + 20];
+    if (!this.is90 && !this.is180 && !this.is270 && this.is360) {
+      this.lineTo= [
+            [80, 20],
+            [80, -20],
+            [140, -20],
+            [140, 0],
+            [100, 0],
+            [100, 20],
+            [80, 20],
+          ],
       this.is90 = true;
-    } else {
-      this.lineTo[0] = [this.lineTo[0][0], this.lineTo[0][1] - 20];
-      this.lineTo[1] = [this.lineTo[1][0] - 60, this.lineTo[1][1] + 40];
-      this.lineTo[2] = [this.lineTo[2][0] - 20, this.lineTo[2][1] + 20];
-      this.lineTo[3] = [this.lineTo[3][0] + 20, this.lineTo[3][1]];
-      this.lineTo[4] = [this.lineTo[4][0], this.lineTo[4][1] - 20];
-      this.lineTo[5] = [this.lineTo[5][0] + 20, this.lineTo[5][1] - 60];
-      this.lineTo[6] = [this.lineTo[6][0], this.lineTo[6][1] - 20];
-      this.is180 = false;
+      this.is360 = false}
+      else if(this.is90 && !this.is180 && !this.is270 && !this.is360) {
+      this.lineTo= [
+        [100, 20],
+        [120, 20],
+        [120, -40],
+        [80, -40],
+        [80, -20],
+        [100, -20],
+        [100, 20],
+      ],
+      this.is180 = true;
+      this.is90 = false
+    }
+     else if(!this.is90 && this.is180 && !this.is270 && !this.is360){
+      this.lineTo= [
+        [80, 0],
+        [140, 0],
+        [140, -40],
+        [120, -40],
+        [120, -20],
+        [80, -20],
+        [80, 0],
+      ],
+
+
+      this.is270 = true;
+      this.is180 = false
+    }
+     else if(!this.is90 && this.is180 && this.is270 && !this.is360){
+      this.lineTo= [
+        [100, -40],
+        [100, 20],
+        [140, 20],
+        [140, 0],
+        [120, 0],
+        [120, -40],
+        [100, -40],
+      ],
+      this.is360 = true;
+      this.is270 = false
     }
   },
   lineTo: [
@@ -127,29 +148,71 @@ export const jey: Shape = {
   is90: false,
   is180: false,
   is270: false,
-  is360: false,
+  is360: true,
 
-  variation: 0,
-  color: "pink",
+  color: "yellow",
   rotate() {
-    if (!this.is90) {
-      this.lineTo[0] = [this.lineTo[0][0], this.lineTo[0][1]];
-      this.lineTo[1] = [this.lineTo[1][0] - 40, this.lineTo[1][1] - 40];
-      this.lineTo[2] = [this.lineTo[2][0] - 20, this.lineTo[2][1] + 20];
-      this.lineTo[3] = [this.lineTo[3][0], this.lineTo[3][1] + 40];
-      this.lineTo[4] = [this.lineTo[4][0] + 40, this.lineTo[4][1]];
-      this.lineTo[5] = [this.lineTo[5][0] + 60, this.lineTo[5][1] + 20];
-      this.lineTo[6] = [this.lineTo[6][0], this.lineTo[6][1]];
+    if (!this.is90 && !this.is180 && !this.is270 && this.is360) {
+      this.lineTo = [
+        [60, 0],
+    [100, 0],
+    [100, 20],
+    [120, 20],
+    [120, -20],
+    [60, -20],
+    [60, 0],
+   
+      ];
       this.is90 = true;
-    } else {
-      this.lineTo[0] = [this.lineTo[0][0], this.lineTo[0][1]];
-      this.lineTo[1] = [this.lineTo[1][0] + 40, this.lineTo[1][1] + 40];
-      this.lineTo[2] = [this.lineTo[2][0] + 20, this.lineTo[2][1] - 20];
-      this.lineTo[3] = [this.lineTo[3][0], this.lineTo[3][1] - 40];
-      this.lineTo[4] = [this.lineTo[4][0] - 40, this.lineTo[4][1]];
-      this.lineTo[5] = [this.lineTo[5][0] - 60, this.lineTo[5][1] - 20];
-      this.lineTo[6] = [this.lineTo[6][0], this.lineTo[6][1]];
-      this.is90 = false;
+      this.is360 = false
+      this.width += 20
+    } else if(this.is90 && !this.is180 && !this.is270 && !this.is360){
+      this.lineTo = [
+        [80, 20],
+    [80, -40],
+    [120, -40],
+    [120, -20],
+    [100, -20],
+    [100, 20],
+    [80, 20],
+    [80, -40],
+    
+      ];
+      this.is180 = true;
+      this.is90 = false
+      this.width -= 20
+    }
+    else if(!this.is90 && this.is180 && !this.is270 && !this.is360){
+      this.lineTo = [
+        [60, 0],
+    [60, -20],
+    [120, -20],
+    [120, 20],
+    [100, 20],
+    [100, 0],
+    [60, 0],
+    [60, -20],
+    
+      ];
+      this.is270 = true;
+      this.is180 = false
+      this.width += 20
+    }
+    else if(!this.is90 && !this.is180 && this.is270 && !this.is360){
+      this.lineTo = [
+        
+    [80, 20],
+    [80, -40],
+    [100, -40],
+    [100, 0],
+    [120, 0],
+    [120, 20],
+    [80, 20]
+    
+      ];
+      this.is360 = true;
+      this.is270 = false
+      this.width -= 20
     }
   },
 
@@ -171,41 +234,27 @@ export const tee: Shape = {
   is90: false,
   is180: false,
   is270: false,
-  is360: false,
-  variation: 0,
-  color: "orange",
+  is360: true,
+
+  color: "green",
   rotate() {
-    if (!this.is90) {
+    if (!this.is90 && !this.is180 && !this.is270 && this.is360) {
       this.lineTo = [
-        [100, -0],
-        [160, -20],
-        [160, 0],
-        [140, 0],
-        [140, 20],
-        [120, 20],
-        [120, 0],
+        [100, -20],
         [100, 0],
+        [80, 0],
+        [80, 20],
+        [100, 20],
+        [100, 40],
+        [120, 40],
+        [120, -20],
         [100, -20],
       ];
       this.is90 = true;
-    } else {
+      this.is360 = false;
+    } else if (this.is90 && !this.is180 && !this.is270 && !this.is360) {
       this.lineTo = [
         [100, 0],
-        [160, 0],
-        [160, -20],
-        [140, -20],
-        [140, -40],
-        [120, -40],
-        [120, -20],
-        [100, -20],
-        [100, 0],
-      ];
-      this.is90 = false;
-    }
-  },
-
-  lineTo: [
-    [100, 0],
     [160, 0],
     [160, -20],
     [140, -20],
@@ -214,6 +263,53 @@ export const tee: Shape = {
     [120, -20],
     [100, -20],
     [100, 0],
+      ];
+      this.is90 = false;
+      this.is180 = true;
+
+    }
+    else if(!this.is90 && this.is180 && !this.is270 && !this.is360){
+      this.lineTo = [
+        [100, -20],
+        [100, 40],
+        [120, 40],
+        [120, 20],
+        [140, 20],
+        [140, 0],
+        [120, 0],
+        [120, -20],
+        [100, -20],
+      ];
+      this.is180 = false;
+      this.is270 = true;
+    }
+    else if(!this.is90 && !this.is180 && this.is270 && !this.is360){
+      this.lineTo = [
+        [80, 0],
+        [140, 0],
+        [140, -20],
+        [120, -20],
+        [120, -40],
+        [100, -40],
+        [100, -20],
+        [80, -20],
+        [80, 0],
+      ];
+      this.is270 = false;
+      this.is360 = true;  
+      }
+  },
+
+  lineTo: [
+    [80, 0],
+    [140, 0],
+    [140, -20],
+    [120, -20],
+    [120, -40],
+    [100, -40],
+    [100, -20],
+    [80, -20],
+    [80, 0],
   ],
 };
 export const zee: Shape = {
@@ -222,14 +318,24 @@ export const zee: Shape = {
   xPos: 100,
   width: 60,
   is90: false,
-  variation: 0,
-  color: "brown",
+
+  color: "orange",
   rotate() {
-    if(!this.is90){
-      this.lineTo= [[100, 20],[100, 0], [120, 0], [120, -40], [100, -40], [100, -20], [80, -20],  [80, 20], [100, 20],  ]    
-      this.is90= true}
-    else{
-      this.lineTo= [
+    if (!this.is90) {
+      this.lineTo = [
+        [100, 20],
+        [100, 0],
+        [120, 0],
+        [120, -40],
+        [100, -40],
+        [100, -20],
+        [80, -20],
+        [80, 20],
+        [100, 20],
+      ];
+      this.is90 = true;
+    } else {
+      this.lineTo = [
         [100, -20],
         [140, -20],
         [140, 0],
@@ -239,8 +345,8 @@ export const zee: Shape = {
         [120, 0],
         [100, 0],
         [100, 0],
-      ]
-      this.is90 = false
+      ];
+      this.is90 = false;
     }
   },
   lineTo: [
@@ -254,7 +360,6 @@ export const zee: Shape = {
     [100, 0],
     [100, 0],
   ],
-  
 };
 export const ess: Shape = {
   id: 7,
@@ -262,8 +367,7 @@ export const ess: Shape = {
   xPos: 100,
   width: 60,
   is90: false,
-  variation: 0,
-  color: "red",
+  color: "aqua",
   rotate() {
     if (!this.is90) {
       this.lineTo = [

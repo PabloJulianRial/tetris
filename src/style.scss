@@ -17,6 +17,7 @@ body {
     line-height: 32px;
     width: 300px;
     margin: 0 auto;
+    
 }
 }
 #game__board {
@@ -177,9 +178,9 @@ body {
     }
   }
 }
-.game {
-  display: none;
-}
+// .game {
+//   display: none;
+// }
 @keyframes gradient {
   0% {
     background-position: 0 0;

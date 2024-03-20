@@ -88,11 +88,11 @@ for (let i: number = 0; i < shapesPerLevel; i++) {
   randomShapes.push(newShape);
 }
 let currentUser: string = "";
-let currentShape = randomShapes[0];
+let currentShape =  shapesArray[3]//randomShapes[0];
 let currentLevel: number = 1;
 let currentScore: number = 0;
 let currentLines: number = 10;
-let fallInterval: number = 80;
+let fallInterval: number = 400;
 let isBlack: boolean = false;
 let isWhite: boolean = true;
 let isPsycho: boolean = false;
@@ -304,3 +304,8 @@ const pauseButton = document.querySelector(".button__pause");
 if (pauseButton) {
   pauseButton.addEventListener("click", togglePauseResume);
 }
+
+
+
+
+
