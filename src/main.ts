@@ -7,36 +7,16 @@ const paint = document.querySelector<HTMLButtonElement>(".button__paint");
 const game = document.querySelector<HTMLDivElement>(".game");
 const form = document.querySelector<HTMLFormElement>("#form");
 const tetrisMusic = document.querySelector<HTMLAudioElement>("#tetrisMusic");
-const level = document.querySelector<HTMLDivElement>(
-  ".game__display__stats__level"
-);
-const score = document.querySelector<HTMLDivElement>(
-  ".game__display__stats__score"
-);
-const lines = document.querySelector<HTMLDivElement>(
-  ".game__display__stats__lines"
-);
-const user = document.querySelector<HTMLDivElement>(
-  ".game__display__stats__user"
-);
-const scoreOne = document.querySelector<HTMLDivElement>(
-  ".game__display__scores__one"
-);
-const scoreTwo = document.querySelector<HTMLDivElement>(
-  ".game__display__scores__two"
-);
-const scoreThree = document.querySelector<HTMLDivElement>(
-  ".game__display__scores__three"
-);
-const scoreFour = document.querySelector<HTMLDivElement>(
-  ".game__display__scores__four"
-);
-const scoreFive = document.querySelector<HTMLDivElement>(
-  ".game__display__scores__five"
-);
-const scoreSix = document.querySelector<HTMLDivElement>(
-  ".game__display__scores__six"
-);
+const level = document.querySelector<HTMLDivElement>(".game__display__stats__level");
+const score = document.querySelector<HTMLDivElement>(".game__display__stats__score");
+const lines = document.querySelector<HTMLDivElement>(".game__display__stats__lines");
+const user = document.querySelector<HTMLDivElement>(".game__display__stats__user");
+const scoreOne = document.querySelector<HTMLDivElement>(".game__display__scores__one");
+const scoreTwo = document.querySelector<HTMLDivElement>(".game__display__scores__two");
+const scoreThree = document.querySelector<HTMLDivElement>(".game__display__scores__three");
+const scoreFour = document.querySelector<HTMLDivElement>(".game__display__scores__four");
+const scoreFive = document.querySelector<HTMLDivElement>(".game__display__scores__five");
+const scoreSix = document.querySelector<HTMLDivElement>(".game__display__scores__six");
 const next = document.querySelector<HTMLButtonElement>(
   ".game__display__next__item"
 );
@@ -83,7 +63,7 @@ const newShapesArray = [...shapesArray];
 for (let i: number = 0; i < shapesPerLevel; i++) {
   const randomIndex: number = Math.floor(Math.random() * newShapesArray.length);
   const newShape: Shape = newShapesArray[randomIndex];
-  randomShapes.push(newShape);
+  randomShapes.unshift(newShape);
 }
 let currentUser: string = "";
 let currentShape = randomShapes[0];
@@ -295,6 +275,7 @@ const togglePauseResume = () => {
     pauseGame();
   }
 };
+
 const pauseButton = document.querySelector(".button__pause");
 if (pauseButton) {
   pauseButton.addEventListener("click", togglePauseResume);
