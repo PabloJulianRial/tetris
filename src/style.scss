@@ -27,9 +27,8 @@ body {
 }
 .heading, .form__button {
   -webkit-text-stroke: 0.5px black; 
-   
   font-size: 30px;
-  border: 1px solid b;
+ 
   text-align: center;
   margin-top: 1rem;
   color: rgb(242, 227, 141);
@@ -39,71 +38,70 @@ body {
 .game {
   display: flex;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); 
-
   width: 360px;
   height: 400px;
   margin: 1rem auto;
-  &__board{
-    background-color: aliceblue;
-  }
   &__display {
+    background-color: rgb(171, 174, 174);
     border: 1px solid black;
     width: 120px;
     display: flex;
     flex-direction: column;
     &__next {
+      &__item3 img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensure the image fits without stretching */
+      }
+      &__item4 img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensure the image fits without stretching */
+      }
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       > * {
         border: 1px solid rgb(76, 20, 20);
-        background-color: rgb(171, 174, 174);
         width: 59px;
         height: 59px;
-       
-        
-      }
-      &__item3 {
-        border-right: 2px inset rgb(135, 134, 134);
-      }
-      &__item1 {
-        border-right: 2px inset rgb(135, 134, 134);
-      }
-    }
+       }
+         }
     &__stats {
-     
-      background-color: rgb(171, 174, 174);
-    
-      height: 100px;
+      height: 90px;
       display: flex;
       flex-direction: column;
-      align-items: left;
-     
+        
       > * {
-        border: 1px solid black;
+        border: 1px solid rgb(76, 20, 20);
         font-weight: 900;
         padding-top: 7px;
-        padding-left: 5px;
+        padding-left: 7px;
         height: 25%;
         font-size: 9px;
+        color: rgb(0, 98, 255);
+        
+        ;
+      
       }
       &__user{
+        padding-bottom:20px ;
         font-size: 20px;
         text-align: center;
         text-transform: capitalize;
         color: yellow;
         -webkit-text-stroke: 0.5px black; 
       }
-      &game__display__stats__lines {
-        font-size: 25px;
-      }
     }
     &__scores {
+      border: 1px solid black;
       > *{
-        font-size: 11px;
+        font-size: 13px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         -webkit-text-stroke: 0.4px black; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+
       }
       
       
@@ -123,8 +121,7 @@ body {
         color: rgb(173, 45, 219);
       }
       &__six {
-        display: flex;
-        flex-direction: row;
+        
         color: rgb(234, 147, 162)
       }
 
@@ -132,22 +129,20 @@ body {
       height: 120px;
       display: flex;
       flex-direction: column;
-      align-items: left;
+      
       justify-content: space-around;
       > * {
         height: 100%;
         padding-top: 3px;
         padding-left: 3px;
         padding-right: 3px;
-        border: 1px solid rgb(110, 105, 105);
-        
-       
         display: flex;
         flex-direction: row;
         justify-content: space-between;
       }
       &__head {
-        font-size: 14px;
+        height: 30px;
+        font-size: 15px;
         color: red;
         padding-left: 17px;
       }
@@ -158,6 +153,13 @@ body {
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(2, 1fr);
       > *{
+        &:hover{
+          color: aliceblue          ;
+        background-color: cadetblue;  
+        }
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 15px;
+        color: rgb(59, 59, 98);
         background-color: rgb(184, 189, 187);
       }
     }
@@ -166,13 +168,11 @@ body {
 // .game{
 //   display: none;
 // }
-.game__display__next__item3 img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure the image fits without stretching */
-}
-.game__display__next__item4 img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure the image fits without stretching */
+@keyframes gradient {
+  0% {
+      background-position: 0 0;
+  }
+  100% {
+      background-position: 0 100%;
+  }
 }

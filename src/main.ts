@@ -2,11 +2,11 @@ import "./style.scss";
 import { Shape, shapesArray } from "./shapes";
 import { nextShapesArray } from "./nextShapes";
 import { orderedScorersArray } from "./users";
-
-
-const game = document.querySelector<HTMLDivElement>(".game")
-const form = document.querySelector<HTMLFormElement>("#form")
-const tetrisMusic = document.querySelector<HTMLAudioElement>("#tetrisMusic")
+ 
+const paint = document.querySelector<HTMLButtonElement>(".button__paint");
+const game = document.querySelector<HTMLDivElement>(".game");
+const form = document.querySelector<HTMLFormElement>("#form");
+const tetrisMusic = document.querySelector<HTMLAudioElement>("#tetrisMusic");
 const level = document.querySelector<HTMLDivElement>(
   ".game__display__stats__level"
 );
@@ -40,21 +40,25 @@ const scoreSix = document.querySelector<HTMLDivElement>(
 const next = document.querySelector<HTMLButtonElement>(
   ".game__display__next__item"
 );
+const start = document.querySelector<HTMLButtonElement>(".button__start");
+const lineDown = document.querySelector<HTMLButtonElement>(".button__lineDown");
 
 const canvas = document.getElementById("game__board") as HTMLCanvasElement;
 const canvasNext1 = document.getElementById("next1") as HTMLCanvasElement;
-const canvasNext2 = document.getElementById("next1") as HTMLCanvasElement;
+
 const ctx = canvas.getContext("2d");
 const ctx1 = canvasNext1.getContext("2d");
-const ctx2 = canvasNext2.getContext("2d");
 
- if (!tetrisMusic ||
-   !form ||
-   !game ||
+if (
+  !paint ||
+  !start ||
+  !tetrisMusic ||
+  !form ||
+  !game ||
   !ctx ||
   !next ||
   !ctx1 ||
-  !ctx2 ||
+  !lineDown ||
   !level ||
   !score ||
   !lines ||
@@ -70,32 +74,36 @@ const ctx2 = canvasNext2.getContext("2d");
 }
 
 //----------the array of shapes to fall-----------
-const shapesPerLevel = 500
+const shapesPerLevel = 500;
 let randomShapes: Shape[] = [];
 let fallenShapesArray: Shape[] = [];
 
+const newShapesArray = [...shapesArray];
+
 for (let i: number = 0; i < shapesPerLevel; i++) {
-  const randomIndex: number = Math.floor(Math.random() * shapesArray.length)
-  const newShape: Shape = shapesArray[randomIndex];
-  randomShapes.push({...newShape});
+  const randomIndex: number = Math.floor(Math.random() * newShapesArray.length);
+  const newShape: Shape = newShapesArray[randomIndex];
+  randomShapes.push(newShape);
 }
-let currentUser: string = ""
-let currentShape =  randomShapes[0];
+let currentUser: string = "";
+let currentShape = randomShapes[0];
 let currentLevel: number = 1;
-let currentScore: number = 1;
+let currentScore: number = 0;
 let currentLines: number = 10;
-let fallInterval: number = 20;
+let fallInterval: number = 80;
+let isBlack: boolean = false;
+let isWhite: boolean = true;
+let isPsycho: boolean = false;
 
 level.innerText = `LEVEL ${currentLevel}`;
 score.innerText = `Score  ${currentScore}`;
 lines.innerText = `Lines ${currentLines}`;
-user.innerHTML= `<div><h5> P1:${currentUser}</h5></div>`;
+user.innerHTML = `<div><h5> P1:${currentUser}</h5></div>`;
 scoreOne.innerHTML = `<div>1st ${orderedScorersArray[0].username}</div><div> ${orderedScorersArray[0].score}</div>`;
-scoreTwo.innerHTML = `<div>1st ${orderedScorersArray[1].username}</div><div> ${orderedScorersArray[1].score}</div>`;
-scoreThree.innerHTML = `<div>1st ${orderedScorersArray[2].username}</div><div> ${orderedScorersArray[2].score}</div>`;
-scoreFour.innerHTML = `<div>1st ${orderedScorersArray[3].username}</div><div> ${orderedScorersArray[3].score}</div>`;
-scoreFive.innerHTML = `<div>1st ${orderedScorersArray[4].username}</div><div> ${orderedScorersArray[4].score}</div>`;
-scoreSix.innerHTML = `<div>1st ${orderedScorersArray[5].username}</div><div> ${orderedScorersArray[5].score}</div>`;
+scoreTwo.innerHTML = `<div>2nd ${orderedScorersArray[1].username}</div><div> ${orderedScorersArray[1].score}</div>`;
+scoreThree.innerHTML = `<div>3rd ${orderedScorersArray[2].username}</div><div> ${orderedScorersArray[2].score}</div>`;
+scoreFour.innerHTML = `<div>4th ${orderedScorersArray[3].username}</div><div> ${orderedScorersArray[3].score}</div>`;
+scoreFive.innerHTML = `<div>5th ${orderedScorersArray[4].username}</div><div> ${orderedScorersArray[4].score}</div>`;
 
 //--------logic to draw the shape------------------
 const drawRandomShape = () => {
@@ -108,65 +116,112 @@ const drawRandomShape = () => {
     drawShape();
     drawNext1Shape();
     drawFallenShapes();
-    console.log(shapesArray);
-    
   }
   if (currentShape.yPos === 380) {
     fallenShapesArray.push(currentShape);
     randomShapes.shift();
     currentShape = randomShapes[0];
     drawFallenShapes();
-  
-    
   }
 };
 
 //----------------------------Events-----------------------------------------------
 
-const handleForm = (event:Event) =>{
-  event.preventDefault(); 
-  const usernameInput = (document.getElementById("username") as HTMLInputElement).value;
+const handleForm = (event: Event) => {
+  event.preventDefault();
+  const usernameInput = (
+    document.getElementById("username") as HTMLInputElement
+  ).value;
   currentUser = usernameInput;
   (document.getElementById("username") as HTMLInputElement).value = "";
-  game.style.display = "flex"
-  form.style.display = "none"
-  console.log("Game started for user:", currentUser);
- user.innerHTML = `<h6>${currentUser}</h6>`
-}
+  game.style.display = "flex";
+  form.style.display = "none";
+  user.innerHTML = `<h6>${currentUser}</h6>`;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  fallenShapesArray = [];
+};
 
 const handleKeyDown = (event: KeyboardEvent) => {
   if (event.key === "ArrowLeft") {
     if (currentShape.xPos > 10) {
-     
-
       currentShape.lineTo.forEach((point) => {
         point[0] -= 20;
       });
       currentShape.xPos -= 20;
     }
   } else if (event.key === "ArrowRight") {
-    if (currentShape.xPos - currentShape.width< 280) {
-     
-
+    if (currentShape.xPos - currentShape.width < 280) {
       currentShape.lineTo.forEach((point) => {
         point[0] += 20;
       });
       currentShape.xPos += 20;
     }
-  // } else if (event.key === "ArrowDown") {
-  //   currentShape.lineTo.forEach((point) => {
-  //     currentShape.yPos += 1;
-  //   });}
-   } else if (event.key === "ArrowUp") {
-    if (currentShape.rotate) {
+  } else if (event.key === "ArrowUp") {
+    
       currentShape.rotate();
-    }
+    
   }
 };
-form.addEventListener("submit", handleForm)
-document.addEventListener("keydown", handleKeyDown);
 
-//setInterval(drawRandomShape, fallInterval);
+const handlePaint = (): void => {
+  if (!isBlack && isWhite && !isPsycho) {
+    canvas.style.backgroundColor = "black";
+    isBlack = true;
+    return;
+  }
+
+  if (isBlack) {
+    canvas.style.background =
+      "linear-gradient(to bottom, #FF00FF, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF0000, #FF00FF)";
+    canvas.style.backgroundSize = "100% 100%";
+    canvas.style.animation = "gradient 15s ease infinite alternate";
+    isBlack = false;
+    isPsycho = true;
+    return;
+  }
+
+  if (isPsycho) {
+    canvas.style.backgroundColor = "white";
+    canvas.style.background = "";
+    canvas.style.animation = "";
+    isPsycho = false;
+    isWhite = true;
+    return;
+  }
+
+  if (isWhite) {
+    canvas.style.backgroundColor = "black";
+    isWhite = false;
+    isBlack = true;
+    return;
+  }
+};
+
+const handleStart = (): void => {
+  startGame();
+};
+
+const handleLineDown = (): void => {
+  ctx.clearRect(0, canvas.height - 20, canvas.width, 20);
+  var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  var shiftedImageData = ctx.createImageData(canvas.width, canvas.height);
+  for (var y = 0; y < canvas.height - 20; y++) {
+    for (var x = 0; x < canvas.width; x++) {
+      var index = y * canvas.width * 4 + x * 4;
+      var shiftedIndex = (y + 20) * canvas.width * 4 + x * 4;
+      for (var i = 0; i < 4; i++) {
+        shiftedImageData.data[shiftedIndex + i] = imageData.data[index + i];
+      }
+    }
+  }
+  ctx.putImageData(shiftedImageData, 0, 0);
+  startGame();
+};
+form.addEventListener("submit", handleForm);
+paint.addEventListener("click", handlePaint);
+document.addEventListener("keydown", handleKeyDown);
+lineDown.addEventListener("click", handleLineDown);
+start.addEventListener("click", handleStart);
 
 //-----------------------Drawing--------------------------------------
 
@@ -216,32 +271,24 @@ const drawNext1Shape = () => {
     }
   });
 };
-// tetrisMusic.play()
+tetrisMusic.play();
 
-
-
-
-
-let intervalId: number | null = null; 
-let isPaused: boolean = false; 
-
+let intervalId: number | null = null;
+let isPaused: boolean = false;
 
 const startGame = () => {
   intervalId = setInterval(drawRandomShape, fallInterval);
 };
 
 const pauseGame = () => {
-  clearInterval(intervalId!); 
+  clearInterval(intervalId!);
   intervalId = null;
   isPaused = true;
- 
 };
-
 
 const resumeGame = () => {
   startGame();
   isPaused = false;
-
 };
 const togglePauseResume = () => {
   if (isPaused) {
@@ -251,11 +298,7 @@ const togglePauseResume = () => {
   }
 };
 
-
 const pauseButton = document.querySelector(".button__pause");
 if (pauseButton) {
   pauseButton.addEventListener("click", togglePauseResume);
 }
-
-
-startGame();
