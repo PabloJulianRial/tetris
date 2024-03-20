@@ -3,6 +3,7 @@ import { Shape, shapesArray } from "./shapes";
 import { nextShapesArray } from "./nextShapes";
 import { orderedScorersArray } from "./users";
  
+
 const paint = document.querySelector<HTMLButtonElement>(".button__paint");
 const game = document.querySelector<HTMLDivElement>(".game");
 const form = document.querySelector<HTMLFormElement>("#form");
@@ -50,6 +51,7 @@ const ctx = canvas.getContext("2d");
 const ctx1 = canvasNext1.getContext("2d");
 
 if (
+ 
   !paint ||
   !start ||
   !tetrisMusic ||
